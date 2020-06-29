@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aha.smallmall.mapper.GoodsPicsMapper">
+  <resultMap id="BaseResultMap" type="com.aha.smallmall.pojo.GoodsPics">
+    <id column="pics_id" jdbcType="VARCHAR" property="picsId" />
+    <result column="goods_id" jdbcType="VARCHAR" property="goodsId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="pics_big" jdbcType="VARCHAR" property="picsBig" />
+    <result column="pics_mid" jdbcType="VARCHAR" property="picsMid" />
+    <result column="pics_sma" jdbcType="VARCHAR" property="picsSma" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pics_id, goods_id, create_time, update_time, pics_big, pics_mid, pics_sma
+  </sql>
+  <select id="selectByExample" parameterType="com.aha.smallmall.pojo.GoodsPicsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from goods_pics
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from goods_pics
+    where pics_id = #{picsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from goods_pics
+    where pics_id = #{picsId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.aha.smallmall.pojo.GoodsPicsExample">
+    delete from goods_pics
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.aha.smallmall.pojo.GoodsPics">
+    insert into goods_pics (pics_id, goods_id, create_time, 
+      update_time, pics_big, pics_mid, 
+      pics_sma)
+    values (#{picsId,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{picsBig,jdbcType=VARCHAR}, #{picsMid,jdbcType=VARCHAR}, 
+      #{picsSma,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aha.smallmall.pojo.GoodsPics">
+    insert into goods_pics
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="picsId != null">
+        pics_id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="picsBig != null">
+        pics_big,
+      </if>
+      <if test="picsMid != null">
+        pics_mid,
+      </if>
+      <if test="picsSma != null">
+        pics_sma,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="picsId != null">
+        #{picsId,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="picsBig != null">
+        #{picsBig,jdbcType=VARCHAR},
+      </if>
+      <if test="picsMid != null">
+        #{picsMid,jdbcType=VARCHAR},
+      </if>
+      <if test="picsSma != null">
+        #{picsSma,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.aha.smallmall.pojo.GoodsPicsExample" resultType="java.lang.Long">
+    select count(*) from goods_pics
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update goods_pics
+    <set>
+      <if test="record.picsId != null">
+        pics_id = #{record.picsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsId != null">
+        goods_id = #{record.goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.picsBig != null">
+        pics_big = #{record.picsBig,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picsMid != null">
+        pics_mid = #{record.picsMid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picsSma != null">
+        pics_sma = #{record.picsSma,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update goods_pics
+    set pics_id = #{record.picsId,jdbcType=VARCHAR},
+      goods_id = #{record.goodsId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      pics_big = #{record.picsBig,jdbcType=VARCHAR},
+      pics_mid = #{record.picsMid,jdbcType=VARCHAR},
+      pics_sma = #{record.picsSma,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aha.smallmall.pojo.GoodsPics">
+    update goods_pics
+    <set>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="picsBig != null">
+        pics_big = #{picsBig,jdbcType=VARCHAR},
+      </if>
+      <if test="picsMid != null">
+        pics_mid = #{picsMid,jdbcType=VARCHAR},
+      </if>
+      <if test="picsSma != null">
+        pics_sma = #{picsSma,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pics_id = #{picsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aha.smallmall.pojo.GoodsPics">
+    update goods_pics
+    set goods_id = #{goodsId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      pics_big = #{picsBig,jdbcType=VARCHAR},
+      pics_mid = #{picsMid,jdbcType=VARCHAR},
+      pics_sma = #{picsSma,jdbcType=VARCHAR}
+    where pics_id = #{picsId,jdbcType=VARCHAR}
+  </update>
+</mapper>

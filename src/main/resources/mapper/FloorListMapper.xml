@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aha.smallmall.mapper.FloorListMapper">
+  <resultMap id="BaseResultMap" type="com.aha.smallmall.pojo.FloorList">
+    <id column="fl_id" jdbcType="VARCHAR" property="flId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="image_src" jdbcType="VARCHAR" property="imageSrc" />
+    <result column="image_width" jdbcType="VARCHAR" property="imageWidth" />
+    <result column="fl_name" jdbcType="VARCHAR" property="flName" />
+    <result column="ft_query" jdbcType="VARCHAR" property="ftQuery" />
+    <result column="ft_id" jdbcType="VARCHAR" property="ftId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    fl_id, create_time, update_time, image_src, image_width, fl_name, ft_query, ft_id
+  </sql>
+  <select id="selectByExample" parameterType="com.aha.smallmall.pojo.FloorListExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from floor_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from floor_list
+    where fl_id = #{flId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from floor_list
+    where fl_id = #{flId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.aha.smallmall.pojo.FloorListExample">
+    delete from floor_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.aha.smallmall.pojo.FloorList">
+    insert into floor_list (fl_id, create_time, update_time, 
+      image_src, image_width, fl_name, 
+      ft_query, ft_id)
+    values (#{flId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{imageSrc,jdbcType=VARCHAR}, #{imageWidth,jdbcType=VARCHAR}, #{flName,jdbcType=VARCHAR}, 
+      #{ftQuery,jdbcType=VARCHAR}, #{ftId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aha.smallmall.pojo.FloorList">
+    insert into floor_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="flId != null">
+        fl_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="imageSrc != null">
+        image_src,
+      </if>
+      <if test="imageWidth != null">
+        image_width,
+      </if>
+      <if test="flName != null">
+        fl_name,
+      </if>
+      <if test="ftQuery != null">
+        ft_query,
+      </if>
+      <if test="ftId != null">
+        ft_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="flId != null">
+        #{flId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageSrc != null">
+        #{imageSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="imageWidth != null">
+        #{imageWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="flName != null">
+        #{flName,jdbcType=VARCHAR},
+      </if>
+      <if test="ftQuery != null">
+        #{ftQuery,jdbcType=VARCHAR},
+      </if>
+      <if test="ftId != null">
+        #{ftId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.aha.smallmall.pojo.FloorListExample" resultType="java.lang.Long">
+    select count(*) from floor_list
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update floor_list
+    <set>
+      <if test="record.flId != null">
+        fl_id = #{record.flId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.imageSrc != null">
+        image_src = #{record.imageSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageWidth != null">
+        image_width = #{record.imageWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flName != null">
+        fl_name = #{record.flName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftQuery != null">
+        ft_query = #{record.ftQuery,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftId != null">
+        ft_id = #{record.ftId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update floor_list
+    set fl_id = #{record.flId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      image_src = #{record.imageSrc,jdbcType=VARCHAR},
+      image_width = #{record.imageWidth,jdbcType=VARCHAR},
+      fl_name = #{record.flName,jdbcType=VARCHAR},
+      ft_query = #{record.ftQuery,jdbcType=VARCHAR},
+      ft_id = #{record.ftId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aha.smallmall.pojo.FloorList">
+    update floor_list
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageSrc != null">
+        image_src = #{imageSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="imageWidth != null">
+        image_width = #{imageWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="flName != null">
+        fl_name = #{flName,jdbcType=VARCHAR},
+      </if>
+      <if test="ftQuery != null">
+        ft_query = #{ftQuery,jdbcType=VARCHAR},
+      </if>
+      <if test="ftId != null">
+        ft_id = #{ftId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fl_id = #{flId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aha.smallmall.pojo.FloorList">
+    update floor_list
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      image_src = #{imageSrc,jdbcType=VARCHAR},
+      image_width = #{imageWidth,jdbcType=VARCHAR},
+      fl_name = #{flName,jdbcType=VARCHAR},
+      ft_query = #{ftQuery,jdbcType=VARCHAR},
+      ft_id = #{ftId,jdbcType=VARCHAR}
+    where fl_id = #{flId,jdbcType=VARCHAR}
+  </update>
+</mapper>

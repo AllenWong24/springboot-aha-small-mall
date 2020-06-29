@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aha.smallmall.mapper.CategoriesMapper">
+  <resultMap id="BaseResultMap" type="com.aha.smallmall.pojo.Categories">
+    <id column="cat_id" jdbcType="VARCHAR" property="catId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+    <result column="cat_name" jdbcType="VARCHAR" property="catName" />
+    <result column="cat_pid" jdbcType="VARCHAR" property="catPid" />
+    <result column="cat_level" jdbcType="INTEGER" property="catLevel" />
+    <result column="cat_key" jdbcType="VARCHAR" property="catKey" />
+    <result column="cat_icon" jdbcType="VARCHAR" property="catIcon" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cat_id, create_time, update_time, is_deleted, cat_name, cat_pid, cat_level, cat_key, 
+    cat_icon
+  </sql>
+  <select id="selectByExample" parameterType="com.aha.smallmall.pojo.CategoriesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from categories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from categories
+    where cat_id = #{catId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from categories
+    where cat_id = #{catId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.aha.smallmall.pojo.CategoriesExample">
+    delete from categories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.aha.smallmall.pojo.Categories">
+    insert into categories (cat_id, create_time, update_time, 
+      is_deleted, cat_name, cat_pid, 
+      cat_level, cat_key, cat_icon
+      )
+    values (#{catId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isDeleted,jdbcType=BIT}, #{catName,jdbcType=VARCHAR}, #{catPid,jdbcType=VARCHAR}, 
+      #{catLevel,jdbcType=INTEGER}, #{catKey,jdbcType=VARCHAR}, #{catIcon,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.aha.smallmall.pojo.Categories">
+    insert into categories
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="catId != null">
+        cat_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="catName != null">
+        cat_name,
+      </if>
+      <if test="catPid != null">
+        cat_pid,
+      </if>
+      <if test="catLevel != null">
+        cat_level,
+      </if>
+      <if test="catKey != null">
+        cat_key,
+      </if>
+      <if test="catIcon != null">
+        cat_icon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="catId != null">
+        #{catId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="catName != null">
+        #{catName,jdbcType=VARCHAR},
+      </if>
+      <if test="catPid != null">
+        #{catPid,jdbcType=VARCHAR},
+      </if>
+      <if test="catLevel != null">
+        #{catLevel,jdbcType=INTEGER},
+      </if>
+      <if test="catKey != null">
+        #{catKey,jdbcType=VARCHAR},
+      </if>
+      <if test="catIcon != null">
+        #{catIcon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.aha.smallmall.pojo.CategoriesExample" resultType="java.lang.Long">
+    select count(*) from categories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update categories
+    <set>
+      <if test="record.catId != null">
+        cat_id = #{record.catId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      </if>
+      <if test="record.catName != null">
+        cat_name = #{record.catName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catPid != null">
+        cat_pid = #{record.catPid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catLevel != null">
+        cat_level = #{record.catLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.catKey != null">
+        cat_key = #{record.catKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catIcon != null">
+        cat_icon = #{record.catIcon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update categories
+    set cat_id = #{record.catId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      is_deleted = #{record.isDeleted,jdbcType=BIT},
+      cat_name = #{record.catName,jdbcType=VARCHAR},
+      cat_pid = #{record.catPid,jdbcType=VARCHAR},
+      cat_level = #{record.catLevel,jdbcType=INTEGER},
+      cat_key = #{record.catKey,jdbcType=VARCHAR},
+      cat_icon = #{record.catIcon,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aha.smallmall.pojo.Categories">
+    update categories
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="catName != null">
+        cat_name = #{catName,jdbcType=VARCHAR},
+      </if>
+      <if test="catPid != null">
+        cat_pid = #{catPid,jdbcType=VARCHAR},
+      </if>
+      <if test="catLevel != null">
+        cat_level = #{catLevel,jdbcType=INTEGER},
+      </if>
+      <if test="catKey != null">
+        cat_key = #{catKey,jdbcType=VARCHAR},
+      </if>
+      <if test="catIcon != null">
+        cat_icon = #{catIcon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cat_id = #{catId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aha.smallmall.pojo.Categories">
+    update categories
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      cat_name = #{catName,jdbcType=VARCHAR},
+      cat_pid = #{catPid,jdbcType=VARCHAR},
+      cat_level = #{catLevel,jdbcType=INTEGER},
+      cat_key = #{catKey,jdbcType=VARCHAR},
+      cat_icon = #{catIcon,jdbcType=VARCHAR}
+    where cat_id = #{catId,jdbcType=VARCHAR}
+  </update>
+</mapper>
