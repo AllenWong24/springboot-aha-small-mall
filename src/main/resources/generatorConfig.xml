@@ -46,19 +46,19 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!-- 指定数据库表 -->
-        <table tableName="users" domainObjectName="Users"></table>
-        <table tableName="carousels" domainObjectName="Carousels"></table>
-        <table tableName="categories" domainObjectName="Categories"></table>
-        <table tableName="categories_goods" domainObjectName="CategoriesGoods"></table>
-        <table tableName="collections" domainObjectName="Collections"></table>
-        <table tableName="floor_list" domainObjectName="FloorList"></table>
-        <table tableName="floor_titles" domainObjectName="FloorTitles"></table>
-        <table tableName="goods" domainObjectName="Goods"></table>
-        <table tableName="goods_attrs" domainObjectName="GoodsAttrs"></table>
-        <table tableName="goods_pics" domainObjectName="GoodsPics"></table>
-        <table tableName="navigations" domainObjectName="Navigations"></table>
-        <table tableName="orders" domainObjectName="Orders"></table>
-        <table tableName="orders_goods" domainObjectName="OrdersGoods"></table>
-        <table tableName="shopping_carts" domainObjectName="ShoppingCarts"></table>
+        <table tableName="users" domainObjectName="Users"/>
+        <table tableName="carousels" domainObjectName="Carousels"/>
+        <table tableName="categories" domainObjectName="Categories"/>
+        <table tableName="categories_goods" domainObjectName="CategoriesGoods"/>
+        <table tableName="collections" domainObjectName="Collections"/>
+        <table tableName="floor_list" domainObjectName="FloorList"/>
+        <table tableName="floor_titles" domainObjectName="FloorTitles"/>
+        <table tableName="goods" domainObjectName="Goods"/>
+        <table tableName="goods_attrs" domainObjectName="GoodsAttrs"/>
+        <table tableName="goods_pics" domainObjectName="GoodsPics"/>
+        <table tableName="navigations" domainObjectName="Navigations"/>
+        <table tableName="orders" domainObjectName="Orders"/>
+        <table tableName="orders_goods" domainObjectName="OrdersGoods"/>
+        <table tableName="shopping_carts" domainObjectName="ShoppingCarts"/>
     </context>
 </generatorConfiguration>
