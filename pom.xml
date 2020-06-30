@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.aha</groupId>
     <artifactId>smallmall</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT-${git.commit.id.abbrev}</version>
     <name>smallmall</name>
     <description>Backend for Aha Small Mall</description>
 
@@ -77,6 +77,17 @@
             <version>3.4.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.72</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.7.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -123,6 +134,13 @@
                 </dependencies>
             </plugin>
             <!-- mybatis -->
+            <!-- git -->
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>4.0.0</version>
+            </plugin>
+            <!-- git -->
         </plugins>
     </build>
 
